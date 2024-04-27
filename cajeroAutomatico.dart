@@ -47,19 +47,10 @@ class Clientes extends CajeroAutomatico {
     print('Cliente Eliminado con Exito');
   }
 
-  void mostrarDatosClientes(String cedula) {
-    datosClientesExistentes.forEach((element) {
-      if (element['cedula'] == cedula) {
-        print(element);
-      }
-    });
-  }
-
-  void motrarDatosClientes2(String cedula) {
-    for (var datos in datosClientesExistentes) {
-      if (datos['cedula'] == cedula) {
-        datos = datos.toString();
-        print(datos);
+  void mostrarClientes(String cedula) {
+    for (var i = 0; i < datosClientesExistentes.length; i++) {
+      if (datosClientesExistentes[i]['cedula'] == cedula) {
+        print(datosClientesExistentes[i]);
       }
     }
   }
@@ -68,7 +59,7 @@ class Clientes extends CajeroAutomatico {
 void main(List<String> args) {
   var cliente = Clientes([]);
 
-  cliente.mostrarDatosClientes("1234567890");
+  cliente.mostrarClientes('1234567890');
   cliente.agregarCliente({
     "nombre": "Carlos",
     "apellido": "Gomez",
