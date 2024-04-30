@@ -31,5 +31,4 @@ class Login implements CajeroAutomatico {
       return false;
     }
   }
-  //Get de la clase Persona
 }
