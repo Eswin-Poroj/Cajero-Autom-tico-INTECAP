@@ -4,7 +4,7 @@ import 'clases/autenticarLogin.dart';
 import 'clases/persona.dart';
 import 'clases/consultas.dart';
 
-var clientes = Clientes();
+var clientes = Clientes([]);
 
 void main(List<String> args) {
   var autenticar = Login();
@@ -36,7 +36,8 @@ void menuPrincipal(String usuario, int pin) {
   String opcion = stdin.readLineSync()!;
   switch (opcion) {
     case '1':
-      Transferir().retirar(pin);
+      var transferir = Transferir();
+      transferir.transferir();
       break;
     case '2':
       break;

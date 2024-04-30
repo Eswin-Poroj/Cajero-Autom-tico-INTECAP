@@ -23,32 +23,38 @@ class Transferir extends CajeroAutomatico {
     for (var datos in Clientes.datosClientesExistentes) {
       if (datos['No. Cuenta'] == noCuenta) {
         encontrada = true;
-        return noCuenta;
+        return datos['No. Cuenta'];
       }
-
-      if (!encontrada) {
-        print('Cuenta no encontrada');
-      }
+    }
+    if (!encontrada) {
+      return false;
     }
   }
 
-  dynamic retirar(int pin) {
+  dynamic transferir() {
     stdout.writeln('Ingrese el número de cuenta a quién le desea transferir: ');
     int noCuenta = int.parse(stdin.readLineSync()!);
-    bool encontrada = pedirCuentaTransferir(noCuenta);
-    if (!encontrada) {
+    var cuentaEncontrada = pedirCuentaTransferir(noCuenta);
+
+    if (cuentaEncontrada == noCuenta) {
+      stdout.writeln('Ingrese la cantidad a transferir: ');
+      double cantidad = double.parse(stdin.readLineSync()!);
       for (var datos in Clientes.datosClientesExistentes) {
-        if (datos['contrasenia'] == pin) {
-          print('Ingrese la cantidad a transferir: ');
-          double cantidad = double.parse(stdin.readLineSync()!);
-          if (datos['saldo'] >= cantidad) {
-            datos['saldo'] -= cantidad;
-            print('Transferencia exitosa');
-          } else {
+        if (datos['No. Cuenta'] == cuentaEncontrada) {
+          if (datos['saldo'] < cantidad) {
             print('Saldo insuficiente');
+            break;
+          } else {
+            datos['saldo'] += cantidad;
+            print('Transferencia exitosa');
+            break;
           }
         }
       }
+    } else {
+      print('Cuenta no encotrada');
     }
   }
 }
+
+class Retirar extends CajeroAutomatico {}
