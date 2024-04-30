@@ -1,73 +1,47 @@
-abstract class CajeroAutomatico {}
+import 'dart:io';
 
-class Clientes extends CajeroAutomatico {
-  dynamic datosClientesExistentes = [
-    {
-      "nombre": "Juan",
-      "apellido": "Perez",
-      "cedula": "1234567890",
-      "direccion": "Calle 1",
-      "telefono": "0987654321",
-      "correo": "juanPerez41@gmail.com",
-      "contrasena": "1432",
-      "saldo": "1000"
-    },
-    {
-      "nombre": "Maria",
-      "apellido": "Gonzalez",
-      "cedula": "0987654321",
-      "direccion": "Calle 2",
-      "telefono": "1234567890",
-      "correo": "mariaGonzales@gmail.com",
-      "contrasena": "5678",
-      "saldo": "2000"
-    },
-    {
-      "nombre": "Pedro",
-      "apellido": "Ramirez",
-      "cedula": "5678901234",
-      "direccion": "Calle 3",
-      "telefono": "6789012345",
-      "correo": "pedroRamirez42@gmail.com",
-      "contraseña": "5423",
-      "saldo": "3000"
-    }
-  ];
+import 'clases/autenticarLogin.dart';
+import 'clases/persona.dart';
+import 'clases/consultas.dart';
 
-  Clientes(this.datosClientesExistentes);
-
-  void agregarCliente(Map<String, dynamic> cliente) {
-    datosClientesExistentes.add(cliente);
-    print('Cliente Agregado con Exito');
-  }
-
-  void eliminarCliente(String cedula) {
-    datosClientesExistentes
-        .removeWhere((element) => element['cedula'] == cedula);
-    print('Cliente Eliminado con Exito');
-  }
-
-  void mostrarClientes(String cedula) {
-    for (var i = 0; i < datosClientesExistentes.length; i++) {
-      if (datosClientesExistentes[i]['cedula'] == cedula) {
-        print(datosClientesExistentes[i]);
-      }
-    }
-  }
-}
+var clientes = Clientes();
 
 void main(List<String> args) {
-  var cliente = Clientes([]);
+  var autenticar = Login();
+  print('CAJERO AUTOMATICO');
+  stdout.writeln('Ingrese su usuario: ');
+  String usuario = stdin.readLineSync()!;
 
-  cliente.mostrarClientes('1234567890');
-  cliente.agregarCliente({
-    "nombre": "Carlos",
-    "apellido": "Gomez",
-    "cedula": "3456789012",
-    "direccion": "Calle 4",
-    "telefono": "7890123456",
-    "correo": "carlosGomez43@gmail.com",
-    "contrasena": "1234",
-    "saldo": "4000"
-  });
+  stdout.writeln('Ingrese su pin');
+  int pin = int.parse(stdin.readLineSync()!);
+  bool inicio = autenticar.login(usuario, pin);
+
+  if (inicio == true) {
+    menuPrincipal(usuario, pin);
+  } else {}
+}
+
+void menuPrincipal(String usuario, int pin) {
+  for (var datos in Clientes.datosClientesExistentes) {
+    if (datos['usuario'] == usuario && datos['contrasenia'] == pin) {
+      print('Bienvenido ${datos['nombre']}');
+      break;
+    }
+  }
+  stdout.writeln('1. Transferencias        2. Retiros');
+  stdout.writeln('3. Consultas             4. Transacciones');
+  stdout.writeln('                 5. Salir');
+  String opcion = stdin.readLineSync()!;
+  switch (opcion) {
+    case '1':
+      print('hola');
+      break;
+    case '2':
+      break;
+    case '3':
+      var consultar = Consulta();
+      consultar.buscar(pin);
+    default:
+      print('Seleccione una opcción correcta');
+  }
 }
