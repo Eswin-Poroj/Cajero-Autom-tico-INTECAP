@@ -40,10 +40,15 @@ void menuPrincipal(String usuario, int pin) {
       transferir.transferir();
       break;
     case '2':
+      var retirar = Retirar();
+      retirar.retirarEfectivo(pin);
       break;
     case '3':
       var consultar = Consulta();
       consultar.buscar(pin);
+      break;
+    case '4':
+      break;
     default:
       print('Seleccione una opcción correcta');
   }
