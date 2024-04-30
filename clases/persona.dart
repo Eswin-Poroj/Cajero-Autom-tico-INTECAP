@@ -5,7 +5,7 @@ class Clientes extends CajeroAutomatico {
     {
       "nombre": "Juan",
       "apellido": "Perez",
-      "No. Cuenta": "5456846516",
+      "No. Cuenta": 5456846516,
       "usuario": "juanPerez",
       "cedula": "1234567890",
       "direccion": "Calle 1",
@@ -17,7 +17,7 @@ class Clientes extends CajeroAutomatico {
     {
       "nombre": "Maria",
       "apellido": "Gonzalez",
-      "No. Cuenta": "5476515456",
+      "No. Cuenta": 5476515456,
       "usuario": "mariaGonzalez",
       "cedula": "0987654321",
       "direccion": "Calle 2",
@@ -29,7 +29,7 @@ class Clientes extends CajeroAutomatico {
     {
       "nombre": "Pedro",
       "apellido": "Ramirez",
-      "No. Cuenta": "5435789565",
+      "No. Cuenta": 5435789565,
       "usuario": "pedroRamirez",
       "cedula": "5678901234",
       "direccion": "Calle 3",

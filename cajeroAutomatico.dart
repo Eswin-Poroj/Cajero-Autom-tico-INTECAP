@@ -18,7 +18,9 @@ void main(List<String> args) {
 
   if (inicio == true) {
     menuPrincipal(usuario, pin);
-  } else {}
+  } else {
+    print('Usuario o contraseña incorrecta');
+  }
 }
 
 void menuPrincipal(String usuario, int pin) {
@@ -34,7 +36,7 @@ void menuPrincipal(String usuario, int pin) {
   String opcion = stdin.readLineSync()!;
   switch (opcion) {
     case '1':
-      print('hola');
+      Transferir().retirar(pin);
       break;
     case '2':
       break;

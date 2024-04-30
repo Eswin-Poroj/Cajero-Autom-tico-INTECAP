@@ -18,11 +18,10 @@ class Consulta extends CajeroAutomatico {
 }
 
 class Transferir extends CajeroAutomatico {
-  dynamic pedirCuentaTransferir(int pin, int noCuenta) {
+  dynamic pedirCuentaTransferir(int noCuenta) {
     bool encontrada = false;
     for (var datos in Clientes.datosClientesExistentes) {
       if (datos['No. Cuenta'] == noCuenta) {
-        print('Cuenta Encontrada');
         encontrada = true;
         return noCuenta;
       }
@@ -33,8 +32,23 @@ class Transferir extends CajeroAutomatico {
     }
   }
 
-  dynamic retirar() {
+  dynamic retirar(int pin) {
     stdout.writeln('Ingrese el número de cuenta a quién le desea transferir: ');
     int noCuenta = int.parse(stdin.readLineSync()!);
+    bool encontrada = pedirCuentaTransferir(noCuenta);
+    if (!encontrada) {
+      for (var datos in Clientes.datosClientesExistentes) {
+        if (datos['contrasenia'] == pin) {
+          print('Ingrese la cantidad a transferir: ');
+          double cantidad = double.parse(stdin.readLineSync()!);
+          if (datos['saldo'] >= cantidad) {
+            datos['saldo'] -= cantidad;
+            print('Transferencia exitosa');
+          } else {
+            print('Saldo insuficiente');
+          }
+        }
+      }
+    }
   }
 }
