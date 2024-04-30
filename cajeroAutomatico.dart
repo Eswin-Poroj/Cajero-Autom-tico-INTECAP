@@ -31,7 +31,7 @@ void menuPrincipal(String usuario, int pin) {
     }
   }
   stdout.writeln('1. Transferencias        2. Retiros');
-  stdout.writeln('3. Consultas             4. Transacciones');
+  stdout.writeln('3. Consultas             4. Cambio de Pin');
   stdout.writeln('                 5. Salir');
   String opcion = stdin.readLineSync()!;
   switch (opcion) {
@@ -48,6 +48,8 @@ void menuPrincipal(String usuario, int pin) {
       consultar.buscar(pin);
       break;
     case '4':
+      var cambiarPin = Clientes([]);
+      cambiarPin.cambiarPin(pin);
       break;
     default:
       print('Seleccione una opcción correcta');

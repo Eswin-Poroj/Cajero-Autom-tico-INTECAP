@@ -1,3 +1,5 @@
+import 'dart:io';
+
 abstract class CajeroAutomatico {}
 
 class Clientes extends CajeroAutomatico {
@@ -89,12 +91,20 @@ class Clientes extends CajeroAutomatico {
     }
   }
 
-  dynamic datos(int pin) {
+  void cambiarPin(int pin) {
     for (var datos in datosClientesExistentes) {
       if (datos['contrasenia'] == pin) {
-        return datos;
-      } else {
-        return 'No se encontró al cliente';
+        print('Ingrese su nuevo pin: ');
+        int nuevoPin = int.parse(stdin.readLineSync()!);
+        print('Confirme su nuevo pin: ');
+        int confirmarPin = int.parse(stdin.readLineSync()!);
+        if (nuevoPin == confirmarPin) {
+          datos['contrasenia'] = nuevoPin;
+          print('Pin cambiado exitosamente');
+        } else {
+          print('Los pin no coinciden');
+        }
+        break;
       }
     }
   }
