@@ -32,7 +32,7 @@ class Transferir extends CajeroAutomatico {
     }
   }
 
-  dynamic transferir() {
+  dynamic transferir(int pin) {
     stdout.writeln('Ingrese el número de cuenta a quién le desea transferir: ');
     int noCuenta = int.parse(stdin.readLineSync()!);
     var cuentaEncontrada = pedirCuentaTransferir(noCuenta);
@@ -47,9 +47,13 @@ class Transferir extends CajeroAutomatico {
             break;
           } else {
             datos['saldo'] += cantidad;
+
             print('Transferencia exitosa');
             break;
           }
+        }
+        if (datos['contrasenia'] == pin) {
+          datos['saldo'] -= cantidad;
         }
       }
     } else {
