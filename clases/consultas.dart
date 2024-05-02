@@ -1,13 +1,6 @@
 import 'dart:io';
 import 'persona.dart';
 
-abstract class Operaciones {
-  void buscar();
-  void pedirCuentaTransferir();
-  void transferir();
-  void retirarEfectivo();
-}
-
 class Consulta extends CajeroAutomatico {
   void buscar(int pin) {
     for (var datos in Clientes.datosClientesExistentes) {
