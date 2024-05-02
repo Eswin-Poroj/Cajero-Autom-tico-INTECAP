@@ -44,53 +44,6 @@ class Clientes extends CajeroAutomatico {
 
   Clientes(List<Map<String, dynamic>> datosClientesExistentes);
 
-  void mostrarClientes(String cedula) {
-    bool encontrado = false;
-
-    for (var datos in datosClientesExistentes) {
-      if (datos['cedula'] == cedula) {
-        print(datos);
-        encontrado = true;
-        break;
-      }
-    }
-
-    if (!encontrado) {
-      print('Cliente no Encontrado');
-    }
-  }
-
-  bool usuersLogin(String usuario) {
-    for (var datos in datosClientesExistentes) {
-      if (datos['usuario'] == usuario) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  bool passwordLogin(int pin) {
-    for (var datos in datosClientesExistentes) {
-      if (datos['contrasenia'] == pin) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  bool login(String usuario, int pin) {
-    var usuers = usuersLogin(usuario);
-    var password = passwordLogin(pin);
-
-    if (password == true && usuers == true) {
-      print('si');
-      return true;
-    } else {
-      print('no');
-      return false;
-    }
-  }
-
   void cambiarPin(int pin) {
     for (var datos in datosClientesExistentes) {
       if (datos['contrasenia'] == pin) {
